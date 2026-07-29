@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+
+<section class="checkout">
+
+<h1>Checkout</h1>
+
+<form action="/place-order" method="POST">
+
+<input
+type="text"
+name="name"
+placeholder="Full Name"
+required>
+
+<input
+type="tel"
+name="phone"
+placeholder="Phone Number"
+required>
+
+<input
+type="email"
+name="email"
+placeholder="Email Address"
+required>
+
+<textarea
+name="address"
+placeholder="Delivery Address"
+required></textarea>
+
+<input
+type="hidden"
+id="cartData"
+name="cart">
+
+<button type="submit">
+Place Order
+</button>
+
+</form>
+
+</section>
+
+<script>
+
+document.getElementById("cartData").value =
+localStorage.getItem("cart");
+
+</script>
+
+{% endblock %}

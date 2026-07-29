@@ -1,0 +1,86 @@
+/* Laptop */
+
+@media(max-width:992px){
+
+.hero{
+grid-template-columns:1fr;
+text-align:center;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.nav-links{
+gap:20px;
+}
+
+}
+
+/* Tablet */
+
+@media(max-width:768px){
+
+.navbar{
+padding:18px 5%;
+}
+
+.nav-links{
+display:none;
+}
+
+.hero{
+padding:40px 5%;
+}
+
+.hero h1{
+font-size:40px;
+}
+
+.hero p{
+font-size:16px;
+}
+
+.products{
+padding:60px 5%;
+}
+
+.products h2{
+font-size:32px;
+}
+
+.product-card img{
+height:300px;
+}
+
+}
+
+/* Mobile */
+
+@media(max-width:480px){
+
+.logo{
+font-size:22px;
+}
+
+.hero h1{
+font-size:34px;
+}
+
+.hero p{
+font-size:15px;
+}
+
+.btn{
+padding:14px 28px;
+}
+
+.product-card img{
+height:260px;
+}
+
+.products h2{
+font-size:28px;
+}
+
+}

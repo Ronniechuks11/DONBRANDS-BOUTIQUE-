@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+
+<section class="cart-page">
+
+<h1>Your Cart</h1>
+
+<div id="cart-items"></div>
+
+<div class="cart-total">
+
+<h2>Total:
+<span id="total">₦0</span>
+</h2>
+
+
+<a href="/checkout" class="btn">
+Proceed to Checkout
+</a>
+
+</div>
+
+</section>
+
+<script>
+
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+const container = document.getElementById("cart-items");
+
+const total = document.getElementById("total");
+
+let sum = 0;
+
+cart.forEach((item,index)=>{
+
+sum += item.price * item.quantity;
+
+container.innerHTML += 
+
+<div class="cart-item">
+
+<img src="/static/${item.image}" width="120">
+
+<div>
+
+<h3>${item.name}</h3>
+
+<p>₦${item.price.toLocaleString()}</p>
+
+<p>Quantity: ${item.quantity}</p>
+
+<button onclick="removeItem(${index})">
+Remove
+</button>
+
+</div>
+
+</div>
+
+;
+
+});
+
+total.innerHTML="₦"+sum.toLocaleString();
+
+function removeItem(index){
+
+cart.splice(index,1);
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+location.reload();
+
+}
+
+</script>
+
+{% endblock %}

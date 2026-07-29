@@ -1,0 +1,476 @@
+{% extends "base.html" %}
+
+{% block title %}Donbrands Boutique{% endblock %}
+
+{% block content %}
+
+<div class="top-bar">
+
+<div class="top-text">
+
+🚚 Free Delivery on Orders Over ₦100,000
+
+</div>
+
+<div class="top-links">
+
+<a href="#">Track Order</a>
+
+<a href="#">Contact</a>
+
+</div>
+
+</div>
+
+<!-- Navbar -->
+<nav class="navbar">
+
+<div class="logo">
+DONBRANDS
+</div>
+
+<div class="menu-btn" id="menuBtn">
+☰
+</div>
+
+<ul class="nav-links" id="navLinks">
+
+<li><a href="/">Home</a></li>
+<li><a href="#products">Shop</a></li>
+<li><a href="#">Men</a></li>
+<li><a href="#">Women</a></li>
+<li><a href="#">Senators</a></li>
+<li><a href="/cart">🛒 Cart</a></li>
+
+</ul>
+
+</nav>
+
+<!-- Hero -->
+<section class="hero" data-aos="fade-up">
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<h4>NEW COLLECTION 2026</h4>
+
+<h1>
+Luxury Fashion<br>
+For Every Occasion
+</h1>
+
+<p>
+Discover premium men's wear, elegant women's outfits and luxury Igbo senator collections.
+</p>
+
+<div class="hero-buttons">
+
+<a href="#products" class="btn">
+Shop Now
+</a>
+
+<a href="#" class="btn-outline">
+New Arrivals
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="new-arrivals" data-aos="fade-up">
+
+<div class="section-title">
+
+<h5>JUST DROPPED 🔥</h5>
+
+<h2>New Arrivals</h2>
+
+<p>
+Fresh styles picked just for you.
+</p>
+
+</div>
+
+<div class="arrival-grid">
+
+<div class="arrival-card">
+
+<img src="{{ url_for('static', filename='images/men/men2.jpg') }}">
+
+<div class="arrival-info">
+
+<span>Men's Collection</span>
+
+<h3>Luxury Casual Set</h3>
+
+<a href="#">Shop Now →</a>
+
+</div>
+
+</div>
+
+<div class="arrival-card">
+
+<img src="{{ url_for('static', filename='images/women/women2.jpg') }}">
+
+<div class="arrival-info">
+
+<span>Women's Collection</span>
+
+<h3>Elegant Evening Dress</h3>
+
+<a href="#">Shop Now →</a>
+
+</div>
+
+</div>
+
+<div class="arrival-card">
+
+<img src="{{ url_for('static', filename='images/senators/senator2.jpg') }}">
+
+<div class="arrival-info">
+
+<span>Traditional Collection</span>
+
+<h3>Premium Senator Wear</h3>
+
+<a href="#">Shop Now →</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Best-sellers -->
+
+<section class="best-sellers" id="products" data-aos="fade-up">
+
+<div class="section-title">
+
+<h5>POPULAR PICKS</h5>
+
+<h2>Best Sellers</h2>
+
+<p>Our customers' favorite collections.</p>
+
+</div>
+
+<div class="product-grid">
+
+{% for product in products %}
+
+<div class="product-card">
+
+<div class="sale-badge">
+HOT
+</div>
+
+<div class="product-image-box">
+
+<span class="wishlist">♡</span>
+
+<a href="/product/{{ product.id }}">
+    <img src="{{ url_for('static', filename=product.image) }}">
+</a>
+
+<div class="quick-actions">
+
+<button onclick="addToCart(
+{{ product.id }},
+'{{ product.name }}',
+{{ product.price }},
+'{{ product.image }}'
+)">
+🛒
+</button>
+
+<a href="/product/{{ product.id }}" class="quick-view">
+👁
+</a>
+
+</div>
+
+</div>
+
+<div class="product-content">
+
+<h3>
+<a href="/product/{{ product.id }}">
+{{ product.name }}
+</a>
+</h3>
+
+<p class="price">
+₦{{ "{:,}".format(product.price) }}
+</p>
+
+<button onclick="addToCart(
+{{ product.id }},
+'{{ product.name }}',
+{{ product.price }},
+'{{ product.image }}'
+)">
+Add to Cart
+</button>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<section class="why-us" data-aos="fade-up">
+
+<div class="section-title">
+
+<h5>WHY CHOOSE US</h5>
+
+<h2>Shopping Made Easy</h2>
+
+</div>
+
+<div class="why-grid">
+
+<div class="why-card">
+
+<div class="why-icon">🚚</div>
+
+<h3>Fast Delivery</h3>
+
+<p>
+Nationwide delivery with secure packaging.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">💎</div>
+
+<h3>Premium Quality</h3>
+
+<p>
+Carefully selected outfits made with quality fabrics.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">🔒</div>
+
+<h3>Secure Ordering</h3>
+
+<p>
+Your orders are handled safely and professionally.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="why-icon">💬</div>
+
+<h3>24/7 Support</h3>
+
+<p>
+We're always ready to help with your order.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="testimonials" data-aos="fade-up">
+
+<div class="section-title">
+
+<h5>HAPPY CUSTOMERS</h5>
+
+<h2>What Our Customers Say</h2>
+
+</div>
+
+<div class="testimonial-grid">
+
+<div class="testimonial-card">
+
+<img src="{{ url_for('static', filename='images/testimonials/customer1.jpg') }}">
+
+<h3>Michael O.</h3>
+
+<div class="stars">⭐⭐⭐⭐⭐</div>
+
+<p>
+Excellent quality! The senator wear looked even better in person. Fast delivery too.
+</p>
+
+</div>
+
+<div class="testimonial-card">
+
+<img src="{{ url_for('static', filename='images/testimonials/customer2.jpg') }}">
+
+<h3>Chiamaka E.</h3>
+
+<div class="stars">⭐⭐⭐⭐⭐</div>
+
+<p>
+Beautiful dress, perfect fit and amazing customer service. I'll definitely order again💯.
+</p>
+
+</div>
+
+<div class="testimonial-card">
+
+<img src="{{ url_for('static', filename='images/testimonials/customer3.jpg') }}">
+
+<h3>David A.</h3>
+
+<div class="stars">⭐⭐⭐⭐⭐</div>
+
+<p>
+Premium quality outfits at great prices. Highly recommended.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="stats" data-aos="zoom-in">
+
+<div class="stats-grid">
+
+<div class="stat-card">
+<h2 class="counter" data-target="10000">0</h2>
+<p>Happy Customers</p>
+</div>
+
+<div class="stat-card">
+<h2 class="counter" data-target="500">0</h2>
+<p>Premium Styles</p>
+</div>
+
+<div class="stat-card">
+<h2 class="counter" data-target="98">0</h2>
+<p>% Customer Satisfaction</p>
+</div>
+
+<div class="stat-card">
+<h2 class="counter" data-target="36">0</h2>
+<p>States Delivered</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="promo-banner">
+
+<div class="promo-content">
+
+<h2>Get 10% OFF Your First Order</h2>
+
+<p>
+Subscribe to our newsletter and receive exclusive offers,
+new arrivals and special discounts.
+</p>
+
+<form class="promo-form">
+
+<input
+type="email"
+placeholder="Enter your email">
+
+<button>
+Subscribe
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+<button id="topBtn">↑</button>
+<footer class="footer" data-aos="fade-up">
+
+<div class="footer-grid">
+
+<div>
+
+<h2>DONBRANDS</h2>
+
+<p>
+Premium men's fashion,
+women's outfits and
+luxury senator wears.
+</p>
+
+</div>
+
+<div>
+
+<h3>Quick Links</h3>
+
+<a href="/">Home</a>
+<a href="#">Shop</a>
+<a href="#">Contact</a>
+
+</div>
+
+<div>
+
+<h3>Categories</h3>
+
+<a href="#">Men</a>
+<a href="#">Women</a>
+<a href="#">Senators</a>
+
+</div>
+
+<div>
+
+<h3>Newsletter</h3>
+
+<form>
+
+<input
+type="email"
+placeholder="Your Email">
+
+<button>
+Subscribe
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+<hr>
+
+<p class="copyright">
+© 2026 Donbrands Boutique.
+All Rights Reserved.
+</p>
+
+</footer>
+
+{% endblock %}
