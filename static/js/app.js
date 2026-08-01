@@ -11,13 +11,13 @@ function addToCart(
     name,
     price,
     image,
-    quantity=1
-    )
+    quantity = 1
+){
 
-    const item = cart.find(p=>p.id===id);
+    const item = cart.find(p => p.id === id);
 
     if(item){
-        item.quantity++;
+        item.quantity += Number(quantity);
     }else{
         cart.push({
             id,
@@ -36,17 +36,18 @@ function addToCart(
 
 function updateCartCount(){
 
-    let total=0;
+    let total = 0;
 
-    cart.forEach(item=>{
+    cart.forEach(item => {
         total += item.quantity;
     });
 
-    const badge=document.querySelector(".cart-icon span");
+    const badge = document.querySelector(".cart-icon span");
+    const navBadge = document.getElementById("navCartCount");
 
-    if(badge){
-        badge.innerHTML=total;
-    }
+    if(badge) badge.innerHTML = total;
+
+    if(navBadge) navBadge.innerHTML = total;
 
 }
 
@@ -175,28 +176,59 @@ observer.observe(statsSection);
 
 const topBtn = document.getElementById("topBtn");
 
-window.addEventListener("scroll",()=>{
+if(topBtn){
 
-if(window.scrollY>500){
+    window.addEventListener("scroll", () => {
 
-topBtn.style.display="block";
+        if(window.scrollY > 500){
+            topBtn.style.display = "block";
+        }else{
+            topBtn.style.display = "none";
+        }
 
-}else{
+    });
 
-topBtn.style.display="none";
+    topBtn.onclick = () => {
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    };
 
 }
 
+const cartInput = document.getElementById("cartData");
+
+if(cartInput){
+
+cartInput.value = JSON.stringify(cart);
+
+const summary = document.getElementById("summaryItems");
+
+const subtotal = document.getElementById("subtotal");
+
+const grandTotal = document.getElementById("grandTotal");
+
+let total = 0;
+
+cart.forEach(item=>{
+
+total += item.price * item.quantity;
+
+summary.innerHTML += `
+<p>
+    ${item.name} × ${item.quantity}
+    <span>₦${(item.price * item.quantity).toLocaleString()}</span>
+</p>
+`;
+
 });
 
-topBtn.onclick=()=>{
+subtotal.innerHTML = "₦" + total.toLocaleString();
 
-window.scrollTo({
+grandTotal.innerHTML =
+"₦" + (total + 5000).toLocaleString();
 
-top:0,
-
-behavior:"smooth"
-
-});
-
-};
+}

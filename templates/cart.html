@@ -30,10 +30,23 @@ Proceed to Checkout
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 const container = document.getElementById("cart-items");
-
 const total = document.getElementById("total");
 
+function renderCart(){
+
+container.innerHTML = "";
+
 let sum = 0;
+
+if(cart.length === 0){
+
+container.innerHTML = "<h2>Your cart is empty.</h2>";
+
+total.innerHTML = "₦0";
+
+return;
+
+}
 
 cart.forEach((item,index)=>{
 
@@ -43,18 +56,28 @@ container.innerHTML +=
 
 <div class="cart-item">
 
-<img src="/static/${item.image}" width="120">
+<img src="/static/${item.image}">
 
-<div>
+<div class="cart-info">
 
 <h3>${item.name}</h3>
 
 <p>₦${item.price.toLocaleString()}</p>
 
-<p>Quantity: ${item.quantity}</p>
+<div class="qty-box">
 
-<button onclick="removeItem(${index})">
+<button onclick="decrease(${index})">−</button>
+
+<span>${item.quantity}</span>
+
+<button onclick="increase(${index})">+</button>
+
+</div>
+
+<button class="remove-btn" onclick="removeItem(${index})">
+
 Remove
+
 </button>
 
 </div>
@@ -65,17 +88,45 @@ Remove
 
 });
 
-total.innerHTML="₦"+sum.toLocaleString();
+total.innerHTML = "₦" + sum.toLocaleString();
+
+localStorage.setItem("cart", JSON.stringify(cart));
+
+}
+
+function increase(index){
+
+cart[index].quantity++;
+
+renderCart();
+
+}
+
+function decrease(index){
+
+if(cart[index].quantity > 1){
+
+cart[index].quantity--;
+
+}else{
+
+cart.splice(index,1);
+
+}
+
+renderCart();
+
+}
 
 function removeItem(index){
 
 cart.splice(index,1);
 
-localStorage.setItem("cart",JSON.stringify(cart));
-
-location.reload();
+renderCart();
 
 }
+
+renderCart();
 
 </script>
 

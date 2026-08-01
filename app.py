@@ -18,9 +18,9 @@ products = [
 
 {
         "id":1,
-        "name":"Luxury Senator White",
-        "price":45000,
-        "old_price":55000,
+        "name":"Luxury Senator Black",
+        "price":39999,
+        "old_price":45000,
         "category":"Senators",
         "image":"images/senators/senator1.jpg",
         "badge":"HOT",
@@ -29,7 +29,7 @@ products = [
 
     {
         "id":2,
-        "name":"Luxury Men's Set",
+        "name":"Luxury Mens Set",
         "price":38000,
         "old_price":45000,
         "category":"Men",
@@ -120,7 +120,8 @@ TOTAL: ₦{total:,}
 
         flash("Order could not be sent.")
 
-    return redirect("/")
+    return
+    render_template("success.html")
 
 @app.route("/product/<int:id>")
 def product(id):
